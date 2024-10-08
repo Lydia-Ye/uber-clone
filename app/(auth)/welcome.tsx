@@ -1,15 +1,16 @@
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import { router } from "expo-router";
+import { useRef, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
 import Swiper from "react-native-swiper";
-import React, { useRef, useState } from "react";
-import { onboarding } from "@/constants";
-import CustomButton from "@/compenents/CustomButton";
 
-const Onboarding = () => {
-  const router = useRouter();
+import CustomButton from "@/compenents/CustomButton";
+import { onboarding } from "@/constants";
+
+const Home = () => {
   const swiperRef = useRef<Swiper>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
   const isLastSlide = activeIndex === onboarding.length - 1;
 
   return (
@@ -46,24 +47,24 @@ const Onboarding = () => {
                 {item.title}
               </Text>
             </View>
-            <Text className="text-lg font-JakartaBold text-center text-[#858585] mx-10 mt-3">
+            <Text className="text-md font-JakartaSemiBold text-center text-[#858585] mx-10 mt-3">
               {item.description}
             </Text>
-          </View> // View要大写！！！
+          </View>
         ))}
       </Swiper>
 
       <CustomButton
-        title={isLastSlide ? "Get Satrted" : "Next"}
+        title={isLastSlide ? "Get Started" : "Next"}
         onPress={() =>
           isLastSlide
             ? router.replace("/(auth)/sign-up")
             : swiperRef.current?.scrollBy(1)
         }
-        className="w-11/12 mt-10"
+        className="w-11/12 mt-10 mb-5"
       />
     </SafeAreaView>
   );
 };
 
-export default Onboarding;
+export default Home;

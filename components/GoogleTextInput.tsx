@@ -4,7 +4,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GoogleInputProps } from "@/types/type";
 import "react-native-get-random-values";
 
-const googlePlacesApiKey = process.env.EXPO_PUBLIC_PLACES_API_KEY;
+const googlePlacesApiKey = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
 
 const GoogleTextInput = ({
   icon,

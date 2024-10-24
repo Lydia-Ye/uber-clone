@@ -17,6 +17,7 @@ import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
 import { useEffect, useState } from "react";
 import { statSync } from "node:fs";
+import { router } from "expo-router";
 
 // const recentRides = [];
 const recentRides = [
@@ -133,7 +134,14 @@ export default function Page() {
   const { hasPermissions, setHaspermissions } = useState(false);
 
   const handleSignOut = () => {};
-  const handleDestinationPress = () => {};
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+    router.push("/(root)/find-ride");
+  };
 
   useEffect(() => {
     const requestLocation = async () => {

@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
+import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
 import * as Location from "expo-location";
 import {
   ActivityIndicator,
@@ -23,11 +23,17 @@ import { useFetch } from "@/lib/fetch";
 export default function Page() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
+  const { signOut } = useAuth();
   const { data: recentRides, loading } = useFetch(`/(api)/ride/${user?.id}`);
 
   const { hasPermissions, setHaspermissions } = useState(false);
 
-  const handleSignOut = () => {};
+  const handleSignOut = () => {
+    signOut();
+
+    router.replace("/(auth)/sign-in");
+  };
+
   const handleDestinationPress = (location: {
     latitude: number;
     longitude: number;

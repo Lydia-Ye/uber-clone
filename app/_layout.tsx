@@ -4,14 +4,16 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-import { Slot } from "expo-router";
 import { tokenCache } from "@/lib/auth";
+import { LogBox } from "react-native";
 
 // for clerk authentification
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+LogBox.ignoreLogs(["Warnings: ..."]);
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -26,7 +28,7 @@ export default function RootLayout() {
 
   if (!publishableKey) {
     throw new Error(
-      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
+      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env",
     );
   }
 
